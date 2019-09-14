@@ -17,6 +17,9 @@ class NeighbourHood(models.Model):
     occupants_count = models.IntegerField(null=True, blank=True)
     Admin = models.ForeignKey(Admin, null=True, blank=True, on_delete=models.SET_NULL)
 
+    def __str__(self):
+        return self.name
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE)
@@ -28,7 +31,6 @@ class UserProfile(models.Model):
         default="/static/img/default.png",
     )
     phone = models.CharField(max_length=20, blank=True, default="")
-    email = models.EmailField(max_length=255, default="")
     email_confirmed = models.BooleanField(default=False)
     bio = models.TextField()
     neighbourhood = models.ForeignKey(

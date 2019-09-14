@@ -59,7 +59,7 @@ def edit_profile(request):
 
     # The sorcery begins from here, see explanation below
     ProfileInlineFormset = inlineformset_factory(
-        User, UserProfile, fields=("photo", "phone", "bio")
+        User, UserProfile, fields=("photo", "phone", "bio", "neighbourhood")
     )
     formset = ProfileInlineFormset(instance=user)
 
