@@ -24,6 +24,12 @@ class NeighbourHood(models.Model):
     def all_neighbourhoods(cls):
         return cls.objects.all()
 
+    # create_neigborhood()
+    # delete_neigborhood()
+    # find_neigborhood(neigborhood_id)
+    # update_neighborhood()
+    # update_occupants()
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE)
@@ -74,3 +80,8 @@ class Business(models.Model):
     @classmethod
     def fetch_businesses_of_neighbourhood(cls, neighbourhood):
         return cls.objects.filter(neighbourhood__name=neighbourhood)
+
+    # create_business()
+    # delete_business()
+    # find_business(business_id)
+    # update_business()
