@@ -16,8 +16,6 @@ def index(request):
 
 @login_required(login_url="login/")
 def home(request):
-    cards = Card.all_cards()
-    comment_date = Card.created_on
     return render(request, "home.html")
 
 
