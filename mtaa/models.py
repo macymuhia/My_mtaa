@@ -14,7 +14,7 @@ class Admin(models.Model):
 class NeighbourHood(models.Model):
     name = models.CharField(max_length=20)
     location = models.CharField(max_length=20)
-    occupants_count = models.IntegerField(null=True, blank=True)
+    occupants_count = models.IntegerField(default=0)
     Admin = models.ForeignKey(Admin, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
@@ -28,18 +28,17 @@ class NeighbourHood(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE)
     photo = models.ImageField(
-        upload_to="vibes/",
-        max_length=255,
-        null=True,
-        blank=True,
-        default="/static/img/default.png",
+        upload_to="profile/", max_length=255, null=True, blank=True, default=""
     )
-    phone = models.CharField(max_length=20, blank=True, default="")
+    phone = models.DecimalField(max_digits=10, decimal_places=0, default=0)
     email_confirmed = models.BooleanField(default=False)
     bio = models.TextField()
     neighbourhood = models.ForeignKey(
         NeighbourHood, null=True, blank=True, on_delete=models.SET_NULL
     )
+
+    def __str__(self):
+        return self.user.username
 
 
 @receiver(post_save, sender=User)
@@ -51,11 +50,16 @@ def update_user_profile(sender, instance, created, **kwargs):
 
 class Business(models.Model):
     name = models.CharField(max_length=30)
-    owner = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    logo = models.ImageField(
+        upload_to="business/", max_length=255, null=True, blank=True, default=""
+    )
+    phone = models.DecimalField(max_digits=10, decimal_places=0, default=0)
+    email = models.EmailField(max_length=255)
+    website = models.URLField(max_length=50, null=True, blank=True, default="")
+    owner = models.ForeignKey(UserProfile, on_delete=models.DO_NOTHING)
     neighbourhood = models.ForeignKey(
         NeighbourHood, null=True, blank=True, on_delete=models.SET_NULL
     )
-    email = models.EmailField(max_length=255)
 
     class Meta:
         verbose_name_plural = "Businesses"
