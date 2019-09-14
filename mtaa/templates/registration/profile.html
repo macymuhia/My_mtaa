@@ -46,17 +46,19 @@
             </div>
             <div class="col-md-9">
                 {% for business in businesses %}
-                <div class="row">
-                    <div class="col-md-3">
-                        {% if business.logo %}
-                        <img src="{{ business.logo.url }}" alt="" class="img-responsive img-rounded"> {% endif %}
-                    </div>
-                    <div class="col-md-9">
-                        <p>{{business.name}}</p>
-                        <p>{{business.phone}}</p>
-                        <p>{{business.email}}</p>
-                        <p>{{business.website}}</p>
-                        <p>{{business.neighbourhood}}</p>
+                <div class="panel">
+                    <div class="row">
+                        <div class="col-md-3">
+                            {% if business.logo %}
+                            <img src="{{ business.logo.url }}" alt="" class="img-responsive img-rounded"> {% endif %}
+                        </div>
+                        <div class="col-md-9">
+                            <p><strong>{{business.name}}</strong></p>
+                            <p class="glyphicon glyphicon-phone">&nbsp;{{business.phone}}</p><br>
+                            <p class="glyphicon glyphicon-envelope">&nbsp;{{business.email}}</p><br>
+                            <p class="glyphicon glyphicon-link">&nbsp;{{business.website}}</p><br>
+                            <p class="glyphicon glyphicon-map-marker">&nbsp;{{business.neighbourhood}}</p>
+                        </div>
                     </div>
                 </div>
                 {% empty %}
