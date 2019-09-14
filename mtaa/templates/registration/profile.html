@@ -1,23 +1,50 @@
 {%extends 'base.html'%} {% load static %}
 <!-- content -->
 {% block content %} {{block.super}}
-<div class="card text-center">
+<div class="card">
     <div class="card-img-overlay">
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-                <h1 class="card-title text-center">User profile</h1>
+            <div class="col-md-3">
+                <h1 class="card-title text-center">{{user_data.username}}</h1>
                 {% if user_profile.photo %}
                 <img class="img-responsive img-circle" src=" {{ user_profile.photo.url }} " alt=""> {% endif %}
-                <p class="card-text">{{user_data.username}}</p>
-                <p>{{user_data.email}}</p>
-                <p>{{user_profile.phone}}</p>
-                <p>{{user_profile.bio}}</p>
-                <p>{{user_profile.neighbourhood}}</p>
-
+                <br>
+                <!-- <p class="card-text">{{user_data.username}}</p> -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <p><strong>Email:</strong></p>
+                    </div>
+                    <div class="col-md-9">
+                        <p>{{user_data.email}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <p><strong>Phone:</strong></p>
+                    </div>
+                    <div class="col-md-9">
+                        <p>{{user_profile.phone}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <p><strong>Bio:</strong></p>
+                    </div>
+                    <div class="col-md-9">
+                        <p>{{user_profile.bio}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <p><strong>Mtaa:</strong></p>
+                    </div>
+                    <div class="col-md-9">
+                        <p>{{user_profile.neighbourhood}}</p>
+                    </div>
+                </div>
                 <a class="btn btn-primary" href="{% url 'edit_profile' %}">Edit Profile</a>
             </div>
-            <div class="col-md-4"></div>
+            <div class="col-md-9"></div>
         </div>
 
     </div>

@@ -20,6 +20,10 @@ class NeighbourHood(models.Model):
     def __str__(self):
         return self.name
 
+    @classmethod
+    def all_neighbourhoods(cls):
+        return cls.objects.all()
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE)
@@ -47,8 +51,22 @@ def update_user_profile(sender, instance, created, **kwargs):
 
 class Business(models.Model):
     name = models.CharField(max_length=30)
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    owner = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     neighbourhood = models.ForeignKey(
         NeighbourHood, null=True, blank=True, on_delete=models.SET_NULL
     )
     email = models.EmailField(max_length=255)
+
+    class Meta:
+        verbose_name_plural = "Businesses"
+
+    def __str__(self):
+        return self.name
+
+    @classmethod
+    def all_businesses(cls):
+        return cls.objects.all()
+
+    @classmethod
+    def fetch_businesses_of_neighbourhood(cls, neighbourhood_id):
+        return cls.objects.filter(neighbourhood__id=neighbourhood_id)
