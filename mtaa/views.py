@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.forms.models import inlineformset_factory
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from .forms import SignUpForm, UserForm
-from .models import UserProfile
+from .models import UserProfile, NeighbourHood, Business
 
 # Create your views here.
 def index(request):
@@ -40,11 +40,17 @@ def profile(request):
     current_user = request.user
     user_data = User.objects.get(id=current_user.id)
     user_profile = UserProfile.objects.get(id=current_user.id)
+    mtaa = user_profile.neighbourhood
+    businesses = Business.fetch_businesses_of_neighbourhood(mtaa)
 
     return render(
         request,
         "registration/profile.html",
-        {"user_data": user_data, "user_profile": user_profile},
+        {
+            "user_data": user_data,
+            "user_profile": user_profile,
+            "businesses": businesses,
+        },
     )
 
 

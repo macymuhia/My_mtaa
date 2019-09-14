@@ -72,5 +72,5 @@ class Business(models.Model):
         return cls.objects.all()
 
     @classmethod
-    def fetch_businesses_of_neighbourhood(cls, neighbourhood_id):
-        return cls.objects.filter(neighbourhood__id=neighbourhood_id)
+    def fetch_businesses_of_neighbourhood(cls, neighbourhood):
+        return cls.objects.filter(neighbourhood__name=neighbourhood)

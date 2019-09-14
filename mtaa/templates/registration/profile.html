@@ -7,7 +7,7 @@
             <div class="col-md-3">
                 <h1 class="card-title text-center">{{user_data.username}}</h1>
                 {% if user_profile.photo %}
-                <img class="img-responsive img-circle" src=" {{ user_profile.photo.url }} " alt=""> {% endif %}
+                <img class="img-responsive thumbnail" src=" {{ user_profile.photo.url }} " alt=""> {% endif %}
                 <br>
                 <!-- <p class="card-text">{{user_data.username}}</p> -->
                 <div class="row">
@@ -44,7 +44,27 @@
                 </div>
                 <a class="btn btn-primary" href="{% url 'edit_profile' %}">Edit Profile</a>
             </div>
-            <div class="col-md-9"></div>
+            <div class="col-md-9">
+                {% for business in businesses %}
+                <div class="row">
+                    <div class="col-md-3">
+                        {% if business.logo %}
+                        <img src="{{ business.logo.url }}" alt="" class="img-responsive img-rounded"> {% endif %}
+                    </div>
+                    <div class="col-md-9">
+                        <p>{{business.name}}</p>
+                        <p>{{business.phone}}</p>
+                        <p>{{business.email}}</p>
+                        <p>{{business.website}}</p>
+                        <p>{{business.neighbourhood}}</p>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="row">
+                    <h2 class="text-center">There are no businesses in {{business.neighbourhood}}</h2>
+                </div>
+                {% endfor %}
+            </div>
         </div>
 
     </div>
