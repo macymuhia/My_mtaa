@@ -81,6 +81,10 @@ class Business(models.Model):
     def fetch_businesses_of_neighbourhood(cls, neighbourhood):
         return cls.objects.filter(neighbourhood__name=neighbourhood)
 
+    @classmethod
+    def search_by_business(cls, search_term):
+        return cls.objects.filter(name__icontains=search_term)
+
     # create_business()
     # delete_business()
     # find_business(business_id)
