@@ -1,5 +1,34 @@
-{%extends 'base.html'%}
+{%extends 'base.html'%} {% load static %}
 <!-- content -->
 {% block content %} {{block.super}}
-<h1>My mtaa</h1>
+<div class="card">
+    <div class="card-img-overlay">
+        <div class="row">
+
+            {% for business in businesses %}
+            <div class="col-md-4">
+                <div class="panel panel-primary">
+                    <div class="row">
+                        <div class="col-md-3">
+                            {% if business.logo %}
+                            <img src="{{ business.logo.url }}" alt="" class="img-responsive img-rounded"> {% endif %}
+                        </div>
+                        <div class="col-md-9">
+                            <p><strong>{{business.name}}</strong></p>
+                            <p class="glyphicon glyphicon-phone">&nbsp;{{business.phone}}</p><br>
+                            <p class="glyphicon glyphicon-envelope">&nbsp;{{business.email}}</p><br>
+                            <p class="glyphicon glyphicon-link">&nbsp;{{business.website}}</p><br>
+                            <p class="glyphicon glyphicon-map-marker">&nbsp;{{business.neighbourhood}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="row">
+                <h2 class="text-center">There are no businesses in {{business.neighbourhood}}</h2>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}

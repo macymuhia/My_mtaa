@@ -10,13 +10,15 @@ from .forms import SignUpForm, UserForm
 from .models import UserProfile, NeighbourHood, Business
 
 # Create your views here.
-def index(request):
-    return redirect("signup")
+# def index(request):
+#     return redirect("signup")
 
 
 @login_required(login_url="login/")
 def home(request):
-    return render(request, "home.html")
+    businesses = Business.all_businesses()
+    neighbourhoods = NeighbourHood.all_neighbourhoods()
+    return render(request, "home.html", {"businesses": businesses})
 
 
 def signup(request):
